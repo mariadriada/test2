@@ -62,10 +62,26 @@ $(document).ready(function() {
 	/* When drop */
 	function droppable(event, ui){ 
 
-		/*
-		ui.draggable.position({of:this, my:"center", at:"center"}) 	*/
+console.log("zoomscale "+ zoomScale);
 
-		console.log("drop");
+		var newLeft = ui.position.left;
+		
+		var newLeft = ui.position.left / zoomScale;
+		var newTop = ui.position.top  / zoomScale;
+
+		console.log("new left "+ newLeft);
+		console.log("new top "+ newTop);
+
+		ui.draggable.position.left = newLeft;
+		ui.draggable.position.top = newTop;
+		
+		ui.draggable.position({
+			of:this
+		});
+
+		console.log(ui.draggable.position());
+
+
 
 	}
 
