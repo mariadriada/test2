@@ -15,6 +15,8 @@
 <script type="text/javascript">
 
 var zoomScale = 1;
+
+
 $(document).ready(function() {
 	
 	/* Original function
@@ -25,23 +27,23 @@ $(document).ready(function() {
 	*/
 	
 
-	/* Start drag 
+	 //Start drag 
 	function startDrag(event, ui){
 
 		$(this).position.left = 0;
 	    $(this).position.top = 0;
 
 	    console.log("startDrag");
-	}*/
+	}
 
-	/* Stop drag 
+	// Stop drag 
 	function stopDrag(event, ui){
 
 		$(this).position.left = 0;
 	    $(this).position.top = 0;
 
 		console.log("stopDrag");
-	}*/
+	}
 
 	/* While drag */
 	function draggable(event, ui){
@@ -59,27 +61,52 @@ $(document).ready(function() {
 		ui.position.top = newTop;
 	}
 
+
+
 	/* When drop */
 	function droppable(event, ui){ 
 
-console.log("zoomscale "+ zoomScale);
-
-		var newLeft = ui.position.left;
+		/*
 		
-		var newLeft = ui.position.left / zoomScale;
-		var newTop = ui.position.top  / zoomScale;
+		
+		var changeLeft = ui.draggable.position().left - ui.position.left;
+		var newLeft = (ui.position.left + changeLeft) * zoomScale ;
 
-		console.log("new left "+ newLeft);
-		console.log("new top "+ newTop);
+		var changeTop = ui.position.top - ui.draggable.position().top; 
+		// Adjust new top by our zoomScale
+	    //var newTop = ui.draggable.position().top + changeTop / zoomScale; 
+	    var newTop =  ui.draggable.position().top + changeTop / zoomScale; 
 
-		ui.draggable.position.left = newLeft;
-		ui.draggable.position.top = newTop;
+		
+		var newTop = (ui.position.top  * zoomScale) *zoomScale;
+
+
+		console.log("ui.draggable.position().left: "+ ui.draggable.position().left +"ui.draggable.position().top: "+ ui.draggable.position().top);
+		console.log("ui.position.left: "+ ui.position.left + "ui.position.top: "+ ui.position.top );
+		console.log("change left "+ changeLeft + "change top "+ changeTop );
+		
+		console.log("new left "+ newLeft + "new top "+ newTop);
+
+
+		ui.draggable.position().left = 100;
+		ui.position.top = 100;
 		
 		ui.draggable.position({
 			of:this
 		});
 
-		console.log(ui.draggable.position());
+		
+
+		console.log(ui.draggable.position());*/
+
+		ui.draggable.position.left = (ui.draggable.position.left - (ui.draggable.position.left - ui.position.left))
+
+		var pos = ui.draggable.position();
+    	alert('top: ' + pos.top+ ', left: ' + pos.left);
+
+    	ui.draggable.position({
+			of:this
+		});
 
 
 
@@ -89,8 +116,8 @@ console.log("zoomscale "+ zoomScale);
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
 			revert: function(obj){ return !obj },
-			//start: startDrag,
-			//stop: stopDrag,
+			start: startDrag,
+			stop: stopDrag,
 			drag: draggable
 			}),
 		drop: droppable
