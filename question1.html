@@ -28,11 +28,16 @@ $(document).ready(function() {
 		console.log($(this).position());
 	}
 
+	function stopDrog(event, ui){
+		console.log("stopDrog");
+		console.log($(this).position());
+	}
 
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
 			revert: function(obj){ return !obj },
-			start: startDrag
+			start: startDrag,
+			stop: stopDrog
 			}),
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
