@@ -45,25 +45,18 @@ $(document).ready(function() {
 
 	/* While drag */
 	function draggable(event, ui){
-		console.log("drag");
-		console.log(ui.originalPosition);
-		console.log($(this).position());
-
-		// find change in left
+		// Find change in left
 		var changeLeft = ui.position.left - ui.originalPosition.left; 
-		// adjust new left by our zoomScale
+		// Adjust new left by our zoomScale
 		var newLeft = ui.originalPosition.left + changeLeft / zoomScale;
+		// Fing change in top
+		var changeTop = ui.position.top - ui.originalPosition.top; 
+		// Adjust new top by our zoomScale
+	    var newTop = ui.originalPosition.top + changeTop / zoomScale; 
 
-		//
-
-
-		console.log("changeLeft "+changeLeft);
-		console.log("Zoom scale "+ zoomScale);
-		console.log("new left "+ newLeft);
-
-		 ui.position.left = newLeft;
-		 console.log($(this).position());
-
+	    //Adjusting presicion with mouse 
+		ui.position.left = newLeft;
+		ui.position.top = newTop;
 	}
 
 
