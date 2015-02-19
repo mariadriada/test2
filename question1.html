@@ -14,10 +14,13 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	/* Original function
 	$("#drop").droppable({
 		accept: $("#drag").draggable({revert: function(obj){ return !obj }}),
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
+	*/
 });
 
 function setScale(v){
