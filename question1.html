@@ -39,9 +39,6 @@ $(document).ready(function() {
 	// Stop drag 
 	function stopDrag(event, ui){
 
-		$(this).position.left = 0;
-	    $(this).position.top = 0;
-
 		console.log("stopDrag");
 	}
 
@@ -65,6 +62,8 @@ $(document).ready(function() {
 
 	/* When drop */
 	function droppable(event, ui){ 
+
+		console.log(ui);
 
 		/*
 		
@@ -97,29 +96,63 @@ $(document).ready(function() {
 
 		
 
-		console.log(ui.draggable.position());*/
+		console.log(ui.draggable.position());
 
-		ui.draggable.position.left = (ui.draggable.position.left - (ui.draggable.position.left - ui.position.left))
+		newLeft = (ui.draggable.position.left - (ui.draggable.position.left - ui.position.left))*zoomScale;
+
+		ui.draggable.position.left = newLeft;
+
+		console.log("new "+ui.draggable.position.left);
+
+		ui.draggable.position.top = (ui.draggable.position.top + (ui.draggable.position.top - ui.position.top))*zoomScale;
+
+		console.log("calcula "+ newLeft);
+
+
+
+		console.log($(ui.draggable).width());
+		console.log($('#drag').height());
+		console.log(ui.draggable.position());
+*/
+
+
 
 		var pos = ui.draggable.position();
-    	alert('top: ' + pos.top+ ', left: ' + pos.left);
-
+    	
     	ui.draggable.position({
-			of:this
+			of:this,
+			my: "center center"
 		});
 
 
 
 	}
 
+	function revert(obj){ 
+		return !obj 
+	}
 
+
+/*
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
-			revert: function(obj){ return !obj },
+			revert: revert,
 			start: startDrag,
 			stop: stopDrag,
 			drag: draggable
 			}),
+		drop: droppable
+	});*/
+
+	 $("#drag").draggable({
+			revert: revert,
+			//start: startDrag,
+			//stop: stopDrag,
+			drag: draggable
+			});
+
+	 $("#drop").droppable({
+		accept: "#drag",
 		drop: droppable
 	});
 
