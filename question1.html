@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>test</title>
+<style>
+.box { width:100px; height:100px; border:solid 1px #F00; }
+#stage { transform:scale(1); width:500px; height:500px; border:solid 1px #06F; background-color:#CCC; }
+#drag{ background-color:#0C3; }
+#drop{ background-color:#063; }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#drop").droppable({
+		accept: $("#drag").draggable({revert: function(obj){ return !obj }}),
+		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
+	});
+});
+
+function setScale(v){
+	$("#stage").css({
+		"transform": "scale(" + v + ")",
+		"transform-origin": "0 0"
+	});
+}
+</script>
+</head>
+
+<body>
+<div>
+<h2>Q. scale이 줄었을 때 발생하는 문제점을 해결해주세요. (자료를 검색하여 참고하셔도 좋습니다.)</h2> <br>
+(jQuery를 수정해도 좋고, 어떤 방식이든 정상적으로 동작하는 것으로 보인다면 괜찮습니다.
+끝내 해결하지 못한다 하여도 노력한 과정을 볼수 있도록 테스트한 소스를 남겨 두세요.)<br>
+<ul>
+	<li>1. drag 할 때 좌표문제</li>
+	<li>2. drop 할 때 좌표문제</li>
+	<li>3. 잔상문제(Chrome 브라우져에서 발생. 스케일 조정 전에도 발생. 1회 drop이후 발생.)</li>
+</ul>
+<br>
+
+</div>
+<button onClick="setScale(1)">scale 1.0</button>
+<button onClick="setScale(0.5)">scale 0.5</button>
+<div id="stage">
+	<div id="drag" class="box">drag</div>
+    <div id="drop" class="box">drop</div>
+</div>
+
+</body>
+</html>
