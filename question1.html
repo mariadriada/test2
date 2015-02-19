@@ -24,29 +24,34 @@ $(document).ready(function() {
 
 	/* Start drag */
 	function startDrag(event, ui){
-		console.log("startDrag");
-		console.log($(this).position());
 
-		console.log("drop position ");
-		console.log($("#drop").position());
+		$(this).position.left = 0;
+	    $(this).position.top = 0;
+
+	    console.log("startDrag");
 	}
 
 	/* Stop drag */
 	function stopDrag(event, ui){
+
+		$(this).position.left = 0;
+	    $(this).position.top = 0;
+
 		console.log("stopDrag");
-		console.log($(this).position());
-
-		console.log("drop position ");
-		console.log($("#drop").position());
-
-
 	}
+
+	/* While drag */
+	function draggable(){
+		console.log("drag");
+	}
+
 
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
 			revert: function(obj){ return !obj },
 			start: startDrag,
-			stop: stopDrag
+			stop: stopDrag,
+			drag: draggable
 			}),
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
