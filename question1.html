@@ -25,23 +25,23 @@ $(document).ready(function() {
 	*/
 	
 
-	/* Start drag */
+	/* Start drag 
 	function startDrag(event, ui){
 
 		$(this).position.left = 0;
 	    $(this).position.top = 0;
 
 	    console.log("startDrag");
-	}
+	}*/
 
-	/* Stop drag */
+	/* Stop drag 
 	function stopDrag(event, ui){
 
 		$(this).position.left = 0;
 	    $(this).position.top = 0;
 
 		console.log("stopDrag");
-	}
+	}*/
 
 	/* While drag */
 	function draggable(event, ui){
@@ -59,15 +59,25 @@ $(document).ready(function() {
 		ui.position.top = newTop;
 	}
 
+	/* When drop */
+	function droppable(event, ui){ 
+
+		/*
+		ui.draggable.position({of:this, my:"center", at:"center"}) 	*/
+
+		console.log("drop");
+
+	}
+
 
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
 			revert: function(obj){ return !obj },
-			start: startDrag,
-			stop: stopDrag,
+			//start: startDrag,
+			//stop: stopDrag,
 			drag: draggable
 			}),
-		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
+		drop: droppable
 	});
 
 
