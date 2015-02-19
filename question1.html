@@ -21,6 +21,22 @@ $(document).ready(function() {
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
 	*/
+
+	/* Start drag */
+	function startDrag(event, ui){
+		console.log("startDrag");
+	}
+
+
+	$("#drop").droppable({
+		accept: $("#drag").draggable({
+			revert: function(obj){ return !obj },
+			start: startDrag
+			}),
+		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
+	});
+
+
 });
 
 function setScale(v){
