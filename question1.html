@@ -26,19 +26,27 @@ $(document).ready(function() {
 	function startDrag(event, ui){
 		console.log("startDrag");
 		console.log($(this).position());
+
+		console.log("drop position ");
+		console.log($("#drop").position());
 	}
 
-	/* stop drog */
-	function stopDrog(event, ui){
-		console.log("stopDrog");
+	/* Stop drag */
+	function stopDrag(event, ui){
+		console.log("stopDrag");
 		console.log($(this).position());
+
+		console.log("drop position ");
+		console.log($("#drop").position());
+
+
 	}
 
 	$("#drop").droppable({
 		accept: $("#drag").draggable({
 			revert: function(obj){ return !obj },
 			start: startDrag,
-			stop: stopDrog
+			stop: stopDrag
 			}),
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
