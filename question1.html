@@ -13,6 +13,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 <script type="text/javascript">
+
+var zoomScale = 1;
 $(document).ready(function() {
 	
 	/* Original function
@@ -21,6 +23,7 @@ $(document).ready(function() {
 		drop: function(event, ui){ ui.draggable.position({of:this, my:"center", at:"center"}) 	}
 	});
 	*/
+	
 
 	/* Start drag */
 	function startDrag(event, ui){
@@ -41,8 +44,22 @@ $(document).ready(function() {
 	}
 
 	/* While drag */
-	function draggable(){
+	function draggable(event, ui){
 		console.log("drag");
+		console.log(ui.originalPosition);
+		console.log($(this).position());
+
+		// find change in left
+		var changeLeft = ui.position.left - ui.originalPosition.left; 
+		// adjust new left by our zoomScale
+		var newLeft = ui.originalPosition.left + changeLeft / zoomScale;
+
+		//
+
+		console.log("changeLeft "+changeLeft);
+		console.log("Zoom scale "+ zoomScale);
+		console.log("new left "+ newLeft);
+
 	}
 
 
@@ -60,6 +77,7 @@ $(document).ready(function() {
 });
 
 function setScale(v){
+	zoomScale = v;
 	$("#stage").css({
 		"transform": "scale(" + v + ")",
 		"transform-origin": "0 0"
