@@ -56,9 +56,13 @@ $(document).ready(function() {
 
 		//
 
+
 		console.log("changeLeft "+changeLeft);
 		console.log("Zoom scale "+ zoomScale);
 		console.log("new left "+ newLeft);
+
+		 ui.position.left = newLeft;
+		 console.log($(this).position());
 
 	}
 
